@@ -197,6 +197,7 @@ def grafico_tempo_vs_vertices(resultados: List[Dict]) -> None:
     ax.legend()
     ax.set_xticks(vertices)
     ax.set_xticklabels([str(v) for v in vertices])
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:.1f}"))
 
     _salvar(fig, "grafico_tempo_vertices")
 
@@ -231,6 +232,7 @@ def grafico_operacoes_vs_vertices(resultados: List[Dict]) -> None:
     ax.legend()
     ax.set_xticks(vertices)
     ax.set_xticklabels([str(v) for v in vertices])
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f"{int(x):,}"))
 
     _salvar(fig, "grafico_operacoes")
 
