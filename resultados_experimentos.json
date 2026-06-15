@@ -1,0 +1,314 @@
+{
+  "experimento_1_escalabilidade": [
+    {
+      "n_vertices": 10,
+      "n_arestas_aprox": 27,
+      "density": 0.3,
+      "tempo_ms_media": 0.045,
+      "tempo_ms_desvio": 0.03,
+      "n_push_media": 24.8,
+      "n_push_desvio": 16.4,
+      "n_relabel_media": 20,
+      "n_relabel_desvio": 13.5,
+      "fluxo_max_media": 153.37,
+      "n_gargalos_media": 3.6
+    },
+    {
+      "n_vertices": 50,
+      "n_arestas_aprox": 735,
+      "density": 0.3,
+      "tempo_ms_media": 13.173,
+      "tempo_ms_desvio": 0.336,
+      "n_push_media": 3334.4,
+      "n_push_desvio": 294.2,
+      "n_relabel_media": 2319.6,
+      "n_relabel_desvio": 6.1,
+      "fluxo_max_media": 733.54,
+      "n_gargalos_media": 13.8
+    },
+    {
+      "n_vertices": 100,
+      "n_arestas_aprox": 2970,
+      "density": 0.3,
+      "tempo_ms_media": 64.291,
+      "tempo_ms_desvio": 57.279,
+      "n_push_media": 9167,
+      "n_push_desvio": 8125.0,
+      "n_relabel_media": 5851.4,
+      "n_relabel_desvio": 5176.8,
+      "fluxo_max_media": 1312.36,
+      "n_gargalos_media": 27.2
+    },
+    {
+      "n_vertices": 250,
+      "n_arestas_aprox": 18675,
+      "density": 0.3,
+      "tempo_ms_media": 1284.261,
+      "tempo_ms_desvio": 711.953,
+      "n_push_media": 66741.6,
+      "n_push_desvio": 38441.6,
+      "n_relabel_media": 49332.2,
+      "n_relabel_desvio": 27316.0,
+      "fluxo_max_media": 3728.66,
+      "n_gargalos_media": 74.2
+    },
+    {
+      "n_vertices": 500,
+      "n_arestas_aprox": 74850,
+      "density": 0.3,
+      "tempo_ms_media": 12616.007,
+      "tempo_ms_desvio": 11462.766,
+      "n_push_media": 203761.6,
+      "n_push_desvio": 189080.6,
+      "n_relabel_media": 149193,
+      "n_relabel_desvio": 135324.9,
+      "fluxo_max_media": 6949.65,
+      "n_gargalos_media": 143.6
+    },
+    {
+      "n_vertices": 1000,
+      "n_arestas_aprox": 299700,
+      "density": 0.3,
+      "tempo_ms_media": 144794.339,
+      "tempo_ms_desvio": 131743.084,
+      "n_push_media": 889486.4,
+      "n_push_desvio": 838770.6,
+      "n_relabel_media": 598351.2,
+      "n_relabel_desvio": 544411.8,
+      "fluxo_max_media": 14045.95,
+      "n_gargalos_media": 288
+    }
+  ],
+  "experimento_2_densidade": [
+    {
+      "density": 0.1,
+      "n_vertices": 100,
+      "n_arestas": 990,
+      "n_repeticoes": 7,
+      "tempo_ms_media": 23.354,
+      "tempo_ms_desvio": 20.955,
+      "n_push_media": 7444.7,
+      "n_push_desvio": 6694.9,
+      "n_relabel_media": 5423.1,
+      "n_relabel_desvio": 4876.5,
+      "fluxo_max_media": 451.71,
+      "n_gargalos_media": 8.3
+    },
+    {
+      "density": 0.2,
+      "n_vertices": 100,
+      "n_arestas": 1980,
+      "n_repeticoes": 7,
+      "tempo_ms_media": 41.294,
+      "tempo_ms_desvio": 37.222,
+      "n_push_media": 8611.4,
+      "n_push_desvio": 7856.7,
+      "n_relabel_media": 5536.7,
+      "n_relabel_desvio": 4998.3,
+      "fluxo_max_media": 821.34,
+      "n_gargalos_media": 14.9
+    },
+    {
+      "density": 0.3,
+      "n_vertices": 100,
+      "n_arestas": 2970,
+      "n_repeticoes": 15,
+      "tempo_ms_media": 53.512,
+      "tempo_ms_desvio": 49.862,
+      "n_push_media": 6898.6,
+      "n_push_desvio": 6444.8,
+      "n_relabel_media": 5234.1,
+      "n_relabel_desvio": 4892.5,
+      "fluxo_max_media": 1420.14,
+      "n_gargalos_media": 28.5
+    },
+    {
+      "density": 0.5,
+      "n_vertices": 100,
+      "n_arestas": 4950,
+      "n_repeticoes": 7,
+      "tempo_ms_media": 119.788,
+      "tempo_ms_desvio": 79.418,
+      "n_push_media": 11760.1,
+      "n_push_desvio": 8217.0,
+      "n_relabel_media": 6994.3,
+      "n_relabel_desvio": 4651.6,
+      "fluxo_max_media": 2417.69,
+      "n_gargalos_media": 47.7
+    },
+    {
+      "density": 0.7,
+      "n_vertices": 100,
+      "n_arestas": 6930,
+      "n_repeticoes": 7,
+      "tempo_ms_media": 164.412,
+      "tempo_ms_desvio": 108.906,
+      "n_push_media": 11399.6,
+      "n_push_desvio": 8005.5,
+      "n_relabel_media": 7018.6,
+      "n_relabel_desvio": 4672.7,
+      "fluxo_max_media": 3310.17,
+      "n_gargalos_media": 67.6
+    },
+    {
+      "density": 1.0,
+      "n_vertices": 100,
+      "n_arestas": 9900,
+      "n_repeticoes": 15,
+      "tempo_ms_media": 113.385,
+      "tempo_ms_desvio": 154.622,
+      "n_push_media": 6261.9,
+      "n_push_desvio": 8158.0,
+      "n_relabel_media": 3384.9,
+      "n_relabel_desvio": 4686.4,
+      "fluxo_max_media": 4828.92,
+      "n_gargalos_media": 99
+    }
+  ],
+  "experimento_3_gargalos": [
+    {
+      "topologia": "Rede Aleatoria Esparsa (n=20, d=0.2)",
+      "tipo": "aleatoria_esparsa",
+      "n_vertices": 20,
+      "n_edges": 76,
+      "source": 0,
+      "sink": 19,
+      "fluxo_maximo": 40.94,
+      "n_gargalos": 2,
+      "gargalos": [
+        {
+          "aresta": "0->1",
+          "capacidade": 34.64,
+          "fluxo": 34.64,
+          "saturacao_pct": 100.0
+        },
+        {
+          "aresta": "0->4",
+          "capacidade": 6.3,
+          "fluxo": 6.3,
+          "saturacao_pct": 100.0
+        }
+      ],
+      "S": [
+        0
+      ],
+      "T": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "topologia": "Rede em Camadas (3 camadas, 4 nos/camada)",
+      "tipo": "camadas",
+      "n_vertices": 14,
+      "n_edges": 23,
+      "source": 0,
+      "sink": 13,
+      "fluxo_maximo": 83.09,
+      "n_gargalos": 5,
+      "gargalos": [
+        {
+          "aresta": "1->7",
+          "capacidade": 2.56,
+          "fluxo": 2.56,
+          "saturacao_pct": 100.0
+        },
+        {
+          "aresta": "3->6",
+          "capacidade": 1.32,
+          "fluxo": 1.32,
+          "saturacao_pct": 100.0
+        },
+        {
+          "aresta": "8->9",
+          "capacidade": 15.37,
+          "fluxo": 15.37,
+          "saturacao_pct": 100.0
+        },
+        {
+          "aresta": "10->13",
+          "capacidade": 34.04,
+          "fluxo": 34.04,
+          "saturacao_pct": 100.0
+        },
+        {
+          "aresta": "11->13",
+          "capacidade": 29.81,
+          "fluxo": 29.81,
+          "saturacao_pct": 100.0
+        }
+      ],
+      "S": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        8,
+        10,
+        11
+      ],
+      "T": [
+        6,
+        7,
+        9,
+        12,
+        13
+      ]
+    },
+    {
+      "topologia": "Rede de Pior Caso (n=8)",
+      "tipo": "pior_caso",
+      "n_vertices": 8,
+      "n_edges": 14,
+      "source": 0,
+      "sink": 7,
+      "fluxo_maximo": 1000001.0,
+      "n_gargalos": 2,
+      "gargalos": [
+        {
+          "aresta": "0->1",
+          "capacidade": 1000000,
+          "fluxo": 1000000,
+          "saturacao_pct": 100.0
+        },
+        {
+          "aresta": "0->4",
+          "capacidade": 1,
+          "fluxo": 1,
+          "saturacao_pct": 100.0
+        }
+      ],
+      "S": [
+        0
+      ],
+      "T": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  ]
+}
