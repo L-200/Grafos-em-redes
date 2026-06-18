@@ -21,7 +21,7 @@ A bateria de testes foi homologada em ambiente **Ubuntu Linux**. Para executar l
 1. Clone o repositório:
 
         git clone https://github.com/L-200/Grafos-em-redes
-        cd Grafos-em-redes
+        cd Grafos-em-redes/src
 
 2. Instale as bibliotecas necessárias para a modelagem de rede e geração de gráficos:
 
@@ -31,4 +31,4 @@ A bateria de testes foi homologada em ambiente **Ubuntu Linux**. Para executar l
 
         python3 main.py
 
-Ao final da execução, os arquivos `.pdf`, `.png` e `.tex` serão gerados automaticamente no diretório raiz com todas as visualizações do fluxo e resultados tabelados.
+Ao final da execução, os arquivos `.pdf`, `.png` e `.tex` serão gerados automaticamente no diretório /data com todas as visualizações do fluxo e resultados tabelados.
