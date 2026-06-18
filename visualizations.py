@@ -432,5 +432,5 @@ def gerar_todas_visualizacoes(todos_resultados: Dict) -> None:
     pr.run(source, sink)
     _, _, gargalos = pr.get_min_cut(source)
     grafico_gargalos_rede(edges, gargalos, pr.n, source, sink)
-
+#oi
     print("\n  Todas as visualizacoes geradas com sucesso.")
