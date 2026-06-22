@@ -45,17 +45,7 @@ def _salvar(fig, nome: str) -> None:
 
 
 def tabela_escalabilidade(resultados: List[Dict]) -> pd.DataFrame:
-    """
-    Gera e exporta a tabela do Experimento 1 (escalabilidade por tamanho).
-
-    Colunas: Vertices | Arestas | Fluxo Max | Tempo(ms) | Push | Relabel | Gargalos
-
-    Args:
-        resultados (List[Dict]): Saida do experimento_escalabilidade().
-
-    Returns:
-        pd.DataFrame: Tabela formatada.
-    """
+    """Gera e exporta a tabela do Experimento 1."""
     rows = []
     for r in resultados:
         rows.append({
@@ -88,17 +78,7 @@ def tabela_escalabilidade(resultados: List[Dict]) -> pd.DataFrame:
 
 
 def tabela_densidade(resultados: List[Dict]) -> pd.DataFrame:
-    """
-    Gera e exporta a tabela do Experimento 2 (impacto da densidade).
-
-    Colunas: Densidade | Rep. | Arestas | Fluxo Max | Tempo(ms) | Push | Relabel
-
-    Args:
-        resultados (List[Dict]): Saida do experimento_densidade().
-
-    Returns:
-        pd.DataFrame: Tabela formatada.
-    """
+    """Gera e exporta a tabela do Experimento 2."""
     rows = []
     for r in resultados:
         rows.append({
@@ -132,17 +112,7 @@ def tabela_densidade(resultados: List[Dict]) -> pd.DataFrame:
 
 
 def tabela_gargalos(resultados_exp3: List[Dict]) -> pd.DataFrame:
-    """
-    Gera e exporta a tabela do Experimento 3 (gargalos identificados).
-
-    Destaca visualmente enlaces com saturacao = 100%.
-
-    Args:
-        resultados_exp3 (List[Dict]): Saida do experimento_gargalos().
-
-    Returns:
-        pd.DataFrame: Tabela de gargalos.
-    """
+    """Gera e exporta a tabela do Experimento 3."""
     rows = []
     for topo in resultados_exp3:
         for g in topo["gargalos"]:
@@ -175,42 +145,37 @@ def tabela_gargalos(resultados_exp3: List[Dict]) -> pd.DataFrame:
 
 def grafico_tempo_vs_vertices(resultados: List[Dict]) -> None:
     """
-    Grafico de linha: tempo medio de execução vs numero de vértices.
-
-    Escala linear com barras de erro (desvio padrao).
-
-    Args:
-        resultados (List[Dict]): Saida do experimento_escalabilidade().
+    Gráfico de linha: tempo médio de execução vs número de vértices.
+    Escala linear limpa, com separadores de milhares no eixo Y para legibilidade.
     """
     vertices = [r["n_vertices"] for r in resultados]
     tempos = [r["tempo_ms_media"] for r in resultados]
     erros = [r["tempo_ms_desvio"] for r in resultados]
 
-    fig, ax = plt.subplots(figsize=(8, 5))
+    fig, ax = plt.subplots(figsize=(7, 4.5))
 
     ax.errorbar(vertices, tempos, yerr=erros,
                 fmt='o-', color=PALETA[0], linewidth=2,
-                markersize=7, capsize=5, label="Tempo medido (media +/- desvio)")
+                markersize=6, capsize=4, elinewidth=1.2,
+                label="Tempo Médio (+/- Desvio)")
 
-    ax.set_xlabel("Numero de Vertices")
+    ax.set_xlabel("Número de Vértices (|V|)")
     ax.set_ylabel("Tempo de Execução (ms)")
-    ax.set_title("Escalabilidade do Push-Relabel por Tamanho de Rede")
-    ax.legend()
+    ax.set_title("Escalabilidade por Tamanho de Rede")
+    
     ax.set_xticks(vertices)
     ax.set_xticklabels([str(v) for v in vertices])
-    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:.1f}"))
-
+    
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:,.0f}"))
+    
+    ax.legend(loc="upper left")
     _salvar(fig, "grafico_tempo_vertices")
 
 
 def grafico_operacoes_vs_vertices(resultados: List[Dict]) -> None:
     """
-    Grafico de linha dupla: numero de operações Push e Relabel vs vertices.
-
-    Escala linear com barras de erro (desvio padrao).
-
-    Args:
-        resultados (List[Dict]): Saida do experimento_escalabilidade().
+    Gráfico de linha dupla: número de operações Push e Relabel vs vértices.
+    Eixo Y formatado em milhares (k) para remover o excesso de zeros.
     """
     vertices = [r["n_vertices"] for r in resultados]
     pushes = [r["n_push_media"] for r in resultados]
@@ -218,76 +183,67 @@ def grafico_operacoes_vs_vertices(resultados: List[Dict]) -> None:
     err_push = [r["n_push_desvio"] for r in resultados]
     err_rel = [r["n_relabel_desvio"] for r in resultados]
 
-    fig, ax = plt.subplots(figsize=(8, 5))
+    fig, ax = plt.subplots(figsize=(7, 4.5))
 
     ax.errorbar(vertices, pushes, yerr=err_push,
-                fmt='s-', color=PALETA[0], linewidth=2,
-                markersize=7, capsize=4, label="Operacoes Push")
+                fmt='s-', color=PALETA[0], linewidth=2, markersize=6, 
+                capsize=4, elinewidth=1.2, label="Operações Push")
     ax.errorbar(vertices, relabels, yerr=err_rel,
-                fmt='^--', color=PALETA[2], linewidth=2,
-                markersize=7, capsize=4, label="Operacoes Relabel")
+                fmt='^--', color=PALETA[2], linewidth=2, markersize=6, 
+                capsize=4, elinewidth=1.2, label="Operações Relabel")
 
-    ax.set_xlabel("Numero de Vértices")
-    ax.set_ylabel("Numero de Operações")
-    ax.set_title("Operações Push e Relabel vs Tamanho da Rede")
-    ax.legend()
+    ax.set_xlabel("Número de Vértices (|V|)")
+    ax.set_ylabel("Quantidade de Operações")
+    ax.set_title("Volume de Operações Locais vs Tamanho da Rede")
+    
     ax.set_xticks(vertices)
     ax.set_xticklabels([str(v) for v in vertices])
-    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f"{int(x):,}"))
-
+    
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f"{int(x/1000)}k" if x > 0 else "0"))
+    
+    ax.legend(loc="upper left")
     _salvar(fig, "grafico_operacoes")
 
 
 def grafico_tempo_vs_densidade(resultados: List[Dict]) -> None:
     """
-    Grafico de linha: tempo medio de execução vs densidade da rede.
-
-    Inclui anotacao destacando o comportamento em densidades instaveis.
-    Utiliza barras de erro assimetricas para evitar valores negativos no eixo Y.
-
-    Args:
-        resultados (List[Dict]): Saida do experimento_densidade().
+    Gráfico de linha: tempo médio de execução vs densidade da rede.
+    Anota o PICO de latência para convergir com o texto do artigo.
     """
     densidades = [r["density"] for r in resultados]
     tempos = [r["tempo_ms_media"] for r in resultados]
     erros = [r["tempo_ms_desvio"] for r in resultados]
 
-    # Cria barras de erro assimetricas: [erro_inferior, erro_superior]
-    # O erro inferior e o minimo entre o desvio e o proprio tempo (nunca cruza zero)
     erros_inferiores = [min(e, t) for e, t in zip(erros, tempos)]
     erros_superiores = erros
     erros_assimetricos = [erros_inferiores, erros_superiores]
 
-    fig, ax = plt.subplots(figsize=(8, 5))
+    fig, ax = plt.subplots(figsize=(7, 4.5))
 
-    # Usa yerr=erros_assimetricos para evitar barras de erro negativas
     ax.errorbar(densidades, tempos, yerr=erros_assimetricos,
                 fmt='D-', color=PALETA[3], linewidth=2,
-                markersize=8, capsize=5, label="Tempo medido (media +/- desvio)")
+                markersize=6, capsize=4, elinewidth=1.2, 
+                label="Tempo Médio (+/- Desvio)")
 
-    # Destaque no ponto de menor tempo
     idx_max = int(np.argmax(tempos))
-    ax.annotate(f"Pico: {tempos[idx_max]:.2f}ms",
+    ax.annotate(f"Pico: {tempos[idx_max]:.0f} ms",
                 xy=(densidades[idx_max], tempos[idx_max]),
-                xytext=(densidades[idx_max] + 0.05, tempos[idx_max] * 1.2),
+                xytext=(densidades[idx_max] - 0.15, tempos[idx_max] * 1.05),
                 arrowprops=dict(arrowstyle="->", color="black"),
-                fontsize=9)
+                fontsize=10, fontweight="bold")
 
-    ax.set_xlabel("Densidade da Rede (|E| / |V| * (|V|-1))")
+    ax.set_xlabel("Densidade da Rede")
     ax.set_ylabel("Tempo de Execução (ms)")
-    ax.set_title("Impacto da Densidade no Desempenho do Push-Relabel (n=100)")
-    ax.legend()
-
+    ax.set_title("Impacto da Densidade no Desempenho (n=100)")
+    
+    ax.set_xticks(densidades)
+    ax.legend(loc="lower right")
+    
     _salvar(fig, "grafico_densidade")
 
 
 def grafico_fluxo_vs_densidade(resultados: List[Dict]) -> None:
-    """
-    Grafico de barras: fluxo máximo médio por densidade da rede.
-
-    Args:
-        resultados (List[Dict]): Saida do experimento_densidade().
-    """
+    """Gráfico de barras: fluxo máximo médio por densidade da rede."""
     densidades = [f"{r['density']:.1f}" for r in resultados]
     fluxos = [r["fluxo_max_media"] for r in resultados]
 
@@ -296,7 +252,6 @@ def grafico_fluxo_vs_densidade(resultados: List[Dict]) -> None:
     bars = ax.bar(densidades, fluxos, color=PALETA[0],
                   edgecolor="white", linewidth=0.8, width=0.6)
 
-    # Anotacoes no topo das barras
     for bar, val in zip(bars, fluxos):
         ax.text(bar.get_x() + bar.get_width() / 2,
                 bar.get_height() + max(fluxos) * 0.01,
@@ -310,7 +265,6 @@ def grafico_fluxo_vs_densidade(resultados: List[Dict]) -> None:
 
 
 def grafico_gargalos_rede(
-    pr,
     edges: List[Tuple],
     gargalos: List[Tuple],
     n_vertices: int,
@@ -318,29 +272,12 @@ def grafico_gargalos_rede(
     sink: int,
     nome_arquivo: str = "grafico_rede_gargalos"
 ) -> None:
-    """
-    Visualizacao do grafo da rede com destaque nos enlaces gargalo.
-
-    Nos: azul=fonte, vermelho=sumidouro, cinza=intermediarios.
-    Arestas normais: cinza com espessura proporcional a capacidade.
-    Arestas gargalo: vermelho tracejado com largura destacada.
-    Labels: "fluxo/capacidade" em cada aresta.
-
-    Args:
-        edges (List[Tuple]): Lista de (u, v, capacidade) de todas as arestas.
-        gargalos (List[Tuple]): Lista de (u, v, cap, fluxo, sat%) dos gargalos.
-        n_vertices (int): Numero total de vertices.
-        source (int): Vertice fonte.
-        sink (int): Vertice sumidouro.
-        nome_arquivo (str): Nome base do arquivo de saida.
-    """
+    """Visualizacao do grafo da rede com destaque nos enlaces gargalo."""
     G = nx.DiGraph()
     G.add_nodes_from(range(n_vertices))
 
     gargalo_set = {(g[0], g[1]) for g in gargalos}
     gargalo_info = {(g[0], g[1]): (g[2], g[3]) for g in gargalos}
-
-    max_cap = max(cap for _, _, cap in edges) if edges else 1
 
     edge_labels = {}
 
@@ -350,12 +287,7 @@ def grafico_gargalos_rede(
             c, f = gargalo_info[(u, v)]
             edge_labels[(u, v)] = f"{f:.0f}/{c:.0f}"
         else:
-            # Opção 1: Mostrar fluxo real e capacidade (ex: 12/50)
-            fluxo_atual = pr.get_flow_on_edge(u, v)
-            edge_labels[(u, v)] = f"{fluxo_atual:.0f}/{cap:.0f}"
-
-            # Opção 2: Mostrar apenas a capacidade nominal (ex: 50)
-            # edge_labels[(u, v)] = f"{cap:.0f}"
+            edge_labels[(u, v)] = f"{cap:.0f}" # Correção aplicada aqui (Opção 1)
 
     node_colors = []
     for node in G.nodes():
@@ -408,12 +340,7 @@ def grafico_gargalos_rede(
 
 
 def gerar_todas_visualizacoes(todos_resultados: Dict) -> None:
-    """
-    Gera todas as tabelas e graficos a partir dos resultados dos experimentos.
-
-    Args:
-        todos_resultados (Dict): Saida de experiments.executar_todos().
-    """
+    """Gera todas as tabelas e graficos a partir dos resultados dos experimentos."""
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     exp1 = todos_resultados["experimento_1_escalabilidade"]
@@ -435,10 +362,10 @@ def gerar_todas_visualizacoes(todos_resultados: Dict) -> None:
     grafico_tempo_vs_densidade(exp2)
     grafico_fluxo_vs_densidade(exp2)
 
-    # Grafico de rede para a topologia em camadas do Exp. 3
     from network_generator import generate_layered_network
     pr, edges, source, sink = generate_layered_network(3, 4, 50.0, seed=42)
     pr.run(source, sink)
     _, _, gargalos = pr.get_min_cut(source)
-    grafico_gargalos_rede(pr, edges, gargalos, pr.n, source, sink)
+    grafico_gargalos_rede(edges, gargalos, pr.n, source, sink)
+
     print("\n  Todas as visualizacoes geradas com sucesso.")
