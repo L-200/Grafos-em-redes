@@ -266,10 +266,10 @@ def grafico_tempo_vs_densidade(resultados: List[Dict]) -> None:
                 markersize=8, capsize=5, label="Tempo medido (media +/- desvio)")
 
     # Destaque no ponto de menor tempo
-    idx_min = int(np.argmin(tempos))
-    ax.annotate(f"Min: {tempos[idx_min]:.2f}ms",
-                xy=(densidades[idx_min], tempos[idx_min]),
-                xytext=(densidades[idx_min] + 0.05, tempos[idx_min] * 1.4),
+    idx_max = int(np.argmax(tempos))
+    ax.annotate(f"Pico: {tempos[idx_max]:.2f}ms",
+                xy=(densidades[idx_max], tempos[idx_max]),
+                xytext=(densidades[idx_max] + 0.05, tempos[idx_max] * 1.2),
                 arrowprops=dict(arrowstyle="->", color="black"),
                 fontsize=9)
 
@@ -310,6 +310,7 @@ def grafico_fluxo_vs_densidade(resultados: List[Dict]) -> None:
 
 
 def grafico_gargalos_rede(
+    pr,
     edges: List[Tuple],
     gargalos: List[Tuple],
     n_vertices: int,
@@ -349,7 +350,12 @@ def grafico_gargalos_rede(
             c, f = gargalo_info[(u, v)]
             edge_labels[(u, v)] = f"{f:.0f}/{c:.0f}"
         else:
-            edge_labels[(u, v)] = f"/{cap:.0f}"
+            # Opção 1: Mostrar fluxo real e capacidade (ex: 12/50)
+            fluxo_atual = pr.get_flow_on_edge(u, v)
+            edge_labels[(u, v)] = f"{fluxo_atual:.0f}/{cap:.0f}"
+
+            # Opção 2: Mostrar apenas a capacidade nominal (ex: 50)
+            # edge_labels[(u, v)] = f"{cap:.0f}"
 
     node_colors = []
     for node in G.nodes():
@@ -434,6 +440,5 @@ def gerar_todas_visualizacoes(todos_resultados: Dict) -> None:
     pr, edges, source, sink = generate_layered_network(3, 4, 50.0, seed=42)
     pr.run(source, sink)
     _, _, gargalos = pr.get_min_cut(source)
-    grafico_gargalos_rede(edges, gargalos, pr.n, source, sink)
-#oi
+    grafico_gargalos_rede(pr, edges, gargalos, pr.n, source, sink)
     print("\n  Todas as visualizacoes geradas com sucesso.")
