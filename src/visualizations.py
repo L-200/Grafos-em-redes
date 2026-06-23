@@ -265,6 +265,7 @@ def grafico_fluxo_vs_densidade(resultados: List[Dict]) -> None:
 
 
 def grafico_gargalos_rede(
+    pr,
     edges: List[Tuple],
     gargalos: List[Tuple],
     n_vertices: int,
@@ -287,7 +288,9 @@ def grafico_gargalos_rede(
             c, f = gargalo_info[(u, v)]
             edge_labels[(u, v)] = f"{f:.0f}/{c:.0f}"
         else:
-            edge_labels[(u, v)] = f"{cap:.0f}" # Correção aplicada aqui (Opção 1)
+            # Puxa o fluxo real do objeto pr para as arestas não-saturadas
+            fluxo = pr.get_flow_on_edge(u, v)
+            edge_labels[(u, v)] = f"{fluxo:.0f}/{cap:.0f}"
 
     node_colors = []
     for node in G.nodes():
@@ -366,6 +369,6 @@ def gerar_todas_visualizacoes(todos_resultados: Dict) -> None:
     pr, edges, source, sink = generate_layered_network(3, 4, 50.0, seed=42)
     pr.run(source, sink)
     _, _, gargalos = pr.get_min_cut(source)
-    grafico_gargalos_rede(edges, gargalos, pr.n, source, sink)
+    grafico_gargalos_rede(pr, edges, gargalos, pr.n, source, sink)
 
     print("\n  Todas as visualizacoes geradas com sucesso.")
